@@ -1,7 +1,7 @@
 import sqlite3
 import pyAesCrypt
 
-decrypted_loc = "/home/jkachuck/simple_encapp/simple_encapp.db"
+decrypted_loc = "./simple_encapp.db"
 
 def connect():
     conn=sqlite3.connect(decrypted_loc)

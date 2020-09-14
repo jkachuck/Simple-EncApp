@@ -18,7 +18,7 @@ password = "test"
 window=Tk()
 
 #setting the location of the db
-decrypted_loc = "/home/jkachuck/simple_encapp/simple_encapp.db"
+decrypted_loc = "./simple_encapp.db"
 
 def getpassword():
     password = tkinter.simpledialog.askstring("Password", "Enter password:", show='*')
