@@ -29,7 +29,21 @@ def view_limit():
 def search(website="",webid="",year="",webpasswd=""):
     conn=sqlite3.connect(decrypted_loc)
     cur=conn.cursor()
-    cur.execute("SELECT * FROM encapp WHERE website=? OR webid=? OR year=? OR webpasswd=?",(website,webid,year,webpasswd))
+    print(website,webid,year,webpasswd)
+    if website!="":
+        newsite = '%' + website + '%'
+    else: newsite = website
+    if webid != "":
+        newid = '%' + webid + '%'
+    else: newid = webid
+    if year != "":
+        newyear = '%' + year + '%'
+    else: newyear = year
+    if webpasswd != "":
+        newpasswd = '%' + webpasswd + '%'
+    else: newpasswd = webpasswd
+    cur.execute("SELECT * FROM encapp WHERE website LIKE ? OR webid LIKE ? OR year LIKE ? OR webpasswd LIKE ?",(newsite,newid,newyear,newpasswd))
+    print(newsite,newid,newyear,newpasswd)
     rows=cur.fetchall()
     conn.close()
     return rows
@@ -41,7 +55,7 @@ def delete(id):
     conn.commit()
     conn.close()
     
-def update(id, website,webid,year,webpasswd):
+def update( id,website,webid,year,webpasswd):
     conn=sqlite3.connect(decrypted_loc)
     cur=conn.cursor()
     cur.execute("UPDATE encapp SET website=?, webid=?, year=?, webpasswd=? WHERE id=? ",(website,webid,year,webpasswd,id) )
