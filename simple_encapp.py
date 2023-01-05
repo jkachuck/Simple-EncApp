@@ -6,7 +6,7 @@ import os
 from tkinter import *
 import tkinter.simpledialog
 #from tkinter import simpledialog
-import backend
+#import backend
 import time
 
 #I am adding the decrypt before anything happens.
@@ -19,6 +19,22 @@ window=Tk()
 
 #setting the location of the db
 decrypted_loc = "./simple_encapp.db"
+
+# adding a check for file
+testNew = os.path.isfile(decrypted_loc)
+print(testNew)
+if testNew == True:
+    fileSizeTest = os.stat(decrypted_loc).st_size
+    print(fileSizeTest)
+    if fileSizeTest > 8192:
+        makeSureTest=tkinter.simpledialog.askstring("Cleanup Check", "If you dont want to exit type GO")
+        if makeSureTest != "GO":
+            quit()
+    newFileTest=tkinter.simpledialog.askstring("Running Check", "if new enter NEW")
+    if newFileTest != "NEW":
+        quit()   
+
+
 
 def getpassword():
     password = tkinter.simpledialog.askstring("Password", "Enter password:", show='*')
@@ -38,7 +54,8 @@ if os.path.isfile( decrypted_loc + ".aes"):
 
 else: password = getpassword()                        
 
-
+#moving the import of backend
+import backend
 def get_selected_row(event):
     try:
         global selected_tuple
